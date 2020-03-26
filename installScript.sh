@@ -65,7 +65,7 @@ nvm install 12.16.1
 ###############################
 # INSTALL GLOBAL NPM PACKAGES #
 ###############################
-npm_globals="eslint gatsby node-sass nodemon prettier"
+npm_globals="eslint gatsby-cli node-sass nodemon prettier"
 npm i -g $npm_globals
 
 ##################
