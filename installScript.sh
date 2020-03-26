@@ -4,7 +4,7 @@ cd ~
 ########################
 # INSTALL APT PACKAGES #
 ########################
-apt_programs='git gimp caffeine curl plank yakuake redshift xscreensaver xscreensaver-data-extra xscreensaver-gl python3-pip'
+apt_programs='git gimp caffeine curl plank guake terminator redshift xscreensaver xscreensaver-data-extra xscreensaver-gl python3-pip xpad focuswriter'
 sudo apt install $apt_programs &&
 
 ##################
@@ -85,36 +85,37 @@ mkdir .config/nvim/
 # cp my-ubuntu-install-script/.bashrc .bashrc
 
 # TERMINAL PROFILE
-#touch .config/gtk-3.0/gtk.css
+touch .config/gtk-3.0/gtk.css
 
-#echo "VteTerminal, vte-terminal {" >> .config/gtk-3.0/gtk.css
-#echo "padding: 40px;" >> .config/gtk-3.0/gtk.css
-#echo "}" >> .config/gtk-3.0/gtk.css
+echo "VteTerminal, vte-terminal {" >> .config/gtk-3.0/gtk.css
+echo "padding: 30px;" >> .config/gtk-3.0/gtk.css
+echo "}" >> .config/gtk-3.0/gtk.css
 
 # cp my-ubuntu-install-script/myprofile.profile .local/share/konsole/myprofile.profile
 
-touch .local/share/konsole/myprofile.profile
+#touch .local/share/konsole/myprofile.profile
 
-echo '[Appearance]' >> .local/share/konsole/myprofile.profile
-echo 'ColorScheme=DarkPastels' >> .local/share/konsole/myprofile.profile
-echo 'Font=Consolas NF,10,-1,5,50,0,0,0,0,0' >> .local/share/konsole/myprofile.profile
+#echo '[Appearance]' >> .local/share/konsole/myprofile.profile
+#echo 'ColorScheme=DarkPastels' >> .local/share/konsole/myprofile.profile
+#echo 'Font=Consolas NF,10,-1,5,50,0,0,0,0,0' >> .local/share/konsole/myprofile.profile
 
-echo '[Cursor Options]' >> .local/share/konsole/myprofile.profile
-echo 'CursorShape=1' >> .local/share/konsole/myprofile.profile
+#echo '[Cursor Options]' >> .local/share/konsole/myprofile.profile
+#echo 'CursorShape=1' >> .local/share/konsole/myprofile.profile
 
-echo '[General]' >> .local/share/konsole/myprofile.profile
-echo 'Environment=TERM=xterm-256color,COLORTERM=truecolor' >> .local/share/konsole/myprofile.profile
-echo 'Name=Profile 1' >> .local/share/konsole/myprofile.profile
-echo 'Parent=FALLBACK/' >> .local/share/konsole/myprofile.profile
-echo 'TerminalMargin=50' >> .local/share/konsole/myprofile.profile
+#echo '[General]' >> .local/share/konsole/myprofile.profile
+#echo 'Environment=TERM=xterm-256color,COLORTERM=truecolor' >> .local/share/konsole/myprofile.profile
+#echo 'Name=Profile 1' >> .local/share/konsole/myprofile.profile
+#echo 'Parent=FALLBACK/' >> .local/share/konsole/myprofile.profile
+#echo 'TerminalMargin=50' >> .local/share/konsole/myprofile.profile
 
-echo '[Terminal Features]' >> .local/share/konsole/myprofile.profile
-echo 'BlinkingCursorEnabled=true' >> .local/share/konsole/myprofile.profile
+#echo '[Terminal Features]' >> .local/share/konsole/myprofile.profile
+#echo 'BlinkingCursorEnabled=true' >> .local/share/konsole/myprofile.profile
 clear
 chmod a+x nvim.appimage
 
 # ADD TO BASHRC
-echo Appending to bashrc file...\n\n
+echo Appending to bashrc file...
+echo
 echo 'alias nvim="~/nvim.appimage"' >> .bashrc
 echo "[ -f ~/.fzf.bash ] && source ~/.fzf.bash" >> .bashrc
 echo 'export PS1="\[\e[92m\]\w\[\e[m\] \[\e[34m\]\\$\[\e[m\]"' >> .bashrc
@@ -168,7 +169,7 @@ echo   'cd ~/Projects' >> .bashrc
 echo '}' >> .bashrc
 echo >> .bashrc
 echo 'function gs(){' >> .bashrc
-echo "git add . && git commit -m \"Autogit: \`date +'%d-%m-%Y %H:%M'\` [skip ci]\" && git push origin master\'" >> .bashrc
+echo "git add . && git commit -m \"Autogit: \`date +'%d-%m-%Y %H:%M'\` [skip ci]\" && git push origin master" >> .bashrc
 echo '}' >> .bashrc
 echo 'function sp(){' >> .bashrc
 echo   'cd ~/Projects && cd $1 && nvim' >> .bashrc
@@ -185,7 +186,8 @@ echo   'cd ~/Projects/fdr-website && nvim' >> .bashrc
 echo '}' >> .bashrc
 clear
 #Neovim init file
-echo Creating Neovim init file...\n\n
+echo Creating Neovim init file...
+echo
 echo let g:auto_save = 1 >> .config/nvim/init.vim
 
 echo "call plug#begin('~/vim/plugged/')" >> .config/nvim/init.vim
@@ -458,6 +460,9 @@ echo "Installing NERD FONTS"
 echo
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 . /nerd-fonts/install.sh
+
+# Avoid ENOSPC error
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 # BINISHED!!!!!
 clear
